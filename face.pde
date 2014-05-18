@@ -108,13 +108,21 @@ class Face {
     vertex(v.x, v.y, v.z, tv.x, tv.y);
   }
 
-  void lineV(Vec3D v) {
-    line(0, 0, 0, v.x, v.y, v.z);
-  }
-
   void rotate3D(Vec3D angle3D) {
     Vec3DHelper.rotate3D(a, angle3D);
     Vec3DHelper.rotate3D(b, angle3D);
     Vec3DHelper.rotate3D(c, angle3D);
+  }
+
+  void applyMatrix(float[][] m) {
+    Vec3DHelper.applyMatrix(a, m);
+    Vec3DHelper.applyMatrix(b, m);
+    Vec3DHelper.applyMatrix(c, m);
+  }
+
+  void rotateAroundAxis(Vec3D axis, float angle) {
+    a.rotateAroundAxis(axis, angle);
+    b.rotateAroundAxis(axis, angle);
+    c.rotateAroundAxis(axis, angle);
   }
 }

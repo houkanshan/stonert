@@ -12,7 +12,8 @@ class Stone {
   float origSize = 100;
   float minSize = 10;
   float maxSize = 250;
-  Vec3D angVel;
+  Boolean selfRotate = false;
+  Vec3D angVel = Vec3D.randomVector().normalizeTo(radians(0.3));
 
   int freq = 0;
   float freqAmp = 0;
@@ -44,8 +45,6 @@ class Stone {
     vecs.add(c);
     vecs.add(d);
 
-    angVel = Vec3D.randomVector().normalizeTo(radians(0.3));
-
     initialize();
   }
 
@@ -69,14 +68,24 @@ class Stone {
       f.setColor(ccolor);
       f.update();
     }
-    rotate3D(angVel);
+    if (selfRotate) {
+      rotate3D(angVel);
+    }
     limitShape();
   }
 
   void render() {
+    if (debug) {
+      lineV(getPointVec());
+      return;
+    }
     for(Face f: faces) {
       f.render();
     }
+  }
+
+  Vec3D getPointVec() {
+    return vecs.get(0);
   }
 
   void setSize(float size) {
@@ -102,6 +111,22 @@ class Stone {
     }
   }
 
+  void rotateTo(Vec3D v) {
+    Vec3D point = getPointVec();
+    Vec3D axis = Vec3DHelper.normalVector(point, v);
+    float angle = point.normalize().angleBetween(v.normalize());
+    println(angle);
+    for(Face f: faces) {
+      f.rotateAroundAxis(axis, angle);
+    }
+  }
+
+  void applyMatrix(float[][] m) {
+    for(Face f: faces) {
+      f.applyMatrix(m);
+    }
+  }
+  
   void addFaces(ArrayList<Vec3D> vecs) {
     // TODO
     faces.add(new Face(vecs.get(0),

@@ -5,24 +5,26 @@ Boolean debug = false;
 
 Flock flock;
 SongAnalyzer songAnalyzer;
-SongDirector songDirector;
+StageDirector stageDirector;
 Sandstorm sandstorm;
 String theme = "black";
 color backgroundColor;
-Boolean fullscreen = true;
+Boolean fullscreen = false;
+Vec3D center;
 
 Boolean recordMovie = false;
 
 void setup() {
   //size(1024, 640, "processing.core.PGraphicsRetina2D");
   size(1024, 640, OPENGL);
+  center = new Vec3D(width/2, height/2, 0);
   //size(displayWidth, displayHeight, OPENGL);
   //hint(ENABLE_RETINA_PIXELS); // useless..
 
-  songAnalyzer = new SongAnalyzer(this, "song.mp3");
   flock = new Flock();
+  songAnalyzer = new SongAnalyzer(this, "song.mp3");
   sandstorm = new Sandstorm();
-  songDirector = new SongDirector(songAnalyzer, flock, sandstorm);
+  stageDirector = new StageDirector(songAnalyzer, flock, sandstorm);
 
   if (theme == "black") {
     backgroundColor = mineShaft;
@@ -41,7 +43,7 @@ void draw() {
 
   //openCamera();
   openLight();
-  songDirector.run();
+  stageDirector.run();
 
   if (recordMovie) {
     saveFrame("dist/####.tif");
@@ -51,6 +53,11 @@ void draw() {
 
 void mousePressed() {
   songAnalyzer.toggle();
+}
+
+void keyPressed() {
+  debug = !debug;
+  println("key");
 }
 
 void openCamera() {
