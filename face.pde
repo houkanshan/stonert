@@ -102,7 +102,6 @@ class Face {
   }
 
 
-
   // util
   void shapeV(Vec3D v, Vec2D tv) {
     vertex(v.x, v.y, v.z, tv.x, tv.y);
@@ -118,11 +117,5 @@ class Face {
     Vec3DHelper.applyMatrix(a, m);
     Vec3DHelper.applyMatrix(b, m);
     Vec3DHelper.applyMatrix(c, m);
-  }
-
-  void rotateAroundAxis(Vec3D axis, float angle) {
-    a.rotateAroundAxis(axis, angle);
-    b.rotateAroundAxis(axis, angle);
-    c.rotateAroundAxis(axis, angle);
   }
 }

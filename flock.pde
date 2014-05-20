@@ -6,23 +6,27 @@ class Flock {
   float pushSpeed = 0;
   float r = 150;
   float density = 0.0005;
-  //float count = int(2 * PI * r * r * density);
-  float count = 1;
+  float count = int(2 * PI * r * r * density);
+  //float count = 1;
   Stone s;
 
   Flock() {
     // Test TODO
-    //Vec3D a = new Vec3D(1, 0, 0);
-    //Vec3D b = a.getRotatedY(radians(30));
-    //b.rotateZ(radians(20));
+    Vec3D a = new Vec3D(1, 1, 1);
+    Vec3D b = a.getRotatedY(radians(45));
+    b.rotateX(radians(45));
+    b.rotateY(radians(160));
 
-    //float[][] m = Vec3DHelper.getRotationMatrix(a, b);
-    //Vec3D shouldB = Vec3DHelper.getApplyMatrix(a, m);
+    println("==");
+    println(a);
+    println(b);
+    Vec3D axis = Vec3DHelper.normalVector(a, b);
+    float angle = a.normalize().angleBetween(b.normalize());
+    println(degrees(angle));
+    a.rotateAroundAxis(axis, angle);
 
-    //println("==");
-    //println(b);
-    //println(shouldB);
-    //println("==");
+    println(a.x/b.x, a.y/b.y, a.z/b.z);
+    println("==");
 
     boids = new CopyOnWriteArrayList<Boid>();
     createSphere();
@@ -34,15 +38,14 @@ class Flock {
       b.run(boids);
     }
 
-    Vec3D mouse = new Vec3D(mouseX - center.x, mouseY - center.y, 10);
-
-    pushMatrix();
-    translate(center.x, center.y, center.z);
-    stroke(red);
-    line(0, 0, 0, mouse.x, mouse.y, mouse.z);
-    s.rotateTo(mouse);
-    s.render();
-    popMatrix();
+    //Vec3D mouse = new Vec3D(mouseX - center.x, mouseY - center.y, 10);
+    //pushMatrix();
+    //translate(center.x, center.y, center.z);
+    //stroke(red);
+    //line(0, 0, 0, mouse.x, mouse.y, mouse.z);
+    //s.rotateTo(mouse);
+    //s.render();
+    //popMatrix();
   }
   
   void createSphere() {

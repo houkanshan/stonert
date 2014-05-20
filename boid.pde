@@ -32,6 +32,9 @@ class Boid {
   }
 
   void render() {
+    stroke(red);
+    line(center.x, center.y, center.z,
+        loc.x, loc.y, loc.z);
     pushMatrix();
 
     translate(loc.x, loc.y, loc.z);

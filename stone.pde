@@ -9,11 +9,13 @@ class Stone {
   Boolean sizeJitterOn = true;
 
   float size = 100;
-  float origSize = 100;
+  float origSize = size;
   float minSize = 10;
   float maxSize = 250;
   Boolean selfRotate = false;
   Vec3D angVel = Vec3D.randomVector().normalizeTo(radians(0.3));
+  Vec3D test1;
+  Vec3D test2;
 
   int freq = 0;
   float freqAmp = 0;
@@ -76,7 +78,12 @@ class Stone {
 
   void render() {
     if (debug) {
-      lineV(getPointVec());
+      stroke(gray);
+      lineV(getPointVec().scaleSelf(size));
+      stroke(disco);
+      lineV(test1);
+      stroke(black);
+      lineV(test2);
       return;
     }
     for(Face f: faces) {
@@ -85,7 +92,7 @@ class Stone {
   }
 
   Vec3D getPointVec() {
-    return vecs.get(0);
+    return vecs.get(0).normalize();
   }
 
   void setSize(float size) {
@@ -112,12 +119,15 @@ class Stone {
   }
 
   void rotateTo(Vec3D v) {
+    v = v.normalize();
+
     Vec3D point = getPointVec();
     Vec3D axis = Vec3DHelper.normalVector(point, v);
-    float angle = point.normalize().angleBetween(v.normalize());
-    println(angle);
-    for(Face f: faces) {
-      f.rotateAroundAxis(axis, angle);
+    test1 = point.scale(100);
+    test2 = axis.scale(100);
+    float angle = point.angleBetween(v);
+    for( Vec3D vec : vecs ) {
+      vec.rotateAroundAxis(axis, angle);
     }
   }
 
