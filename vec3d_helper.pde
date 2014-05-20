@@ -6,6 +6,14 @@ static class Vec3DHelper {
     v.rotateZ(angle3D.z);
     return v;
   }
+  static Vec3D rotate3D(Vec3D v, Vec3D angle3D, Vec3D baseV) {
+    v.subSelf(baseV);
+    v.rotateX(angle3D.x);
+    v.rotateY(angle3D.y);
+    v.rotateZ(angle3D.z);
+    v.addSelf(baseV);
+    return v;
+  }
 
   static Vec3D normalVector(Vec3D l1, Vec3D l2) {
     return l1.cross(l2).normalize();

@@ -52,6 +52,9 @@ class Stone {
 
   // fuck processing stupid `this` keyword.
   void initialize() {
+    size = size + random(-60, 10);
+    origSize = size;
+
     scale(size);
 
     addFaces(vecs);
@@ -113,8 +116,8 @@ class Stone {
   }
 
   void rotate3D(Vec3D angle3D) {
-    for(Face f: faces) {
-      f.rotate3D(angle3D);
+    for( Vec3D vec : vecs ) {
+      Vec3DHelper.rotate3D(vec, angle3D);
     }
   }
 
@@ -132,8 +135,8 @@ class Stone {
   }
 
   void applyMatrix(float[][] m) {
-    for(Face f: faces) {
-      f.applyMatrix(m);
+    for( Vec3D v : vecs ) {
+      Vec3DHelper.applyMatrix(v, m);
     }
   }
   

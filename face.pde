@@ -101,21 +101,8 @@ class Face {
     return Vec3DHelper.normalVector(ac, ab);
   }
 
-
   // util
   void shapeV(Vec3D v, Vec2D tv) {
     vertex(v.x, v.y, v.z, tv.x, tv.y);
-  }
-
-  void rotate3D(Vec3D angle3D) {
-    Vec3DHelper.rotate3D(a, angle3D);
-    Vec3DHelper.rotate3D(b, angle3D);
-    Vec3DHelper.rotate3D(c, angle3D);
-  }
-
-  void applyMatrix(float[][] m) {
-    Vec3DHelper.applyMatrix(a, m);
-    Vec3DHelper.applyMatrix(b, m);
-    Vec3DHelper.applyMatrix(c, m);
   }
 }
