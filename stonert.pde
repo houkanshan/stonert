@@ -57,7 +57,6 @@ void mousePressed() {
 
 void keyPressed() {
   debug = !debug;
-  println("key");
 }
 
 void openCamera() {
