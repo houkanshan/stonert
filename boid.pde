@@ -18,6 +18,14 @@ class Boid {
     loc = new Vec3D(x, y, z);
   }
 
+  Boid(float x, float y, float z, Stone _body) {
+    body = _body;
+
+    acc = new Vec3D(0, 0, 0);
+    vel = new Vec3D(random(0.5,1), random(-1,1), random(-2,2));
+    loc = new Vec3D(x, y, z);
+  }
+
   void run(CopyOnWriteArrayList<Boid> boids) {
     update();
     render();

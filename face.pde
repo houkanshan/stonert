@@ -85,7 +85,7 @@ class Face {
     stroke(0);
 
     tint(ccolor);
-    fill(254);
+    fill(ccolor);
     texture(img);
     shapeV(a, ta);
     shapeV(b, tb);

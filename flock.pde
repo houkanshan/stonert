@@ -8,16 +8,17 @@ class Flock {
   Boolean speedLimit = true;
   float pushSpeed = 0;
   float r = 150;
-  float density = 0.0005;
-  float count = int(2 * PI * r * r * density);
+  //float density = 0.001;
+  //float count = int(2 * PI * r * r * density);
+  // just use count.
+  float count = 100;
+  float maxStoneSize = 100;
+  float minStoneSize = 10;
   float locJitter = 60;
-  Stone s;
 
   Flock() {
     boids = new CopyOnWriteArrayList<Boid>();
     createSphere();
-    s = new Stone();
-    println(angAcc, angVel);
   }
 
   void run() {
@@ -36,8 +37,10 @@ class Flock {
   }
   
   void createSphere() {
+    float step = exp(maxStoneSize/10) / count;
     for (int i = 0; i < count; i++) {
-      addBoidRandomInSphere();
+      float avgSize = 10 * log((i + 1) * step);
+      addBoidRandomInSphere(min(minStoneSize, avgSize - 10), avgSize + 10);
     }
   }
 
@@ -48,12 +51,13 @@ class Flock {
     }
   }
 
-  void addBoidRandomInSphere() {
+  void addBoidRandomInSphere(float start, float end) {
+    Stone body = new Stone(random(start, end));
+
     Vec3D v = Vec3D.randomVector().normalizeTo(r);
     Vec3D loc = v.add(center).jitter(locJitter);
-    Boid b = new Boid(loc.x, loc.y, loc.z);
+    Boid b = new Boid(loc.x, loc.y, loc.z, body);
 
-    Stone body = b.body;
     body.rotateTo(v);
     addBoid(b);
   }

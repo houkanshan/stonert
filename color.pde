@@ -1,6 +1,7 @@
 color disco = color(105, 0, 92);
 color gray = color(180, 180, 180);
 color red = color(254, 0, 0);
+color blood = color(138, 7, 7);
 
 color white = color(240, 240, 240);
 color mercury = color(227, 227, 227);

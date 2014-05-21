@@ -28,6 +28,19 @@ class Stone {
   }
 
   Stone() {
+    initToTetrahedra();
+    initialize();
+  }
+
+  Stone(float size) {
+    size = size;
+    origSize = size;
+
+    initToTetrahedra();
+    initialize();
+  }
+
+  void initToTetrahedra() {
     Vec3D a = new Vec3D(1, 0, 0);
     Vec3D b = new Vec3D(1, 0, 0);
     Vec3D c = new Vec3D(1, 0, 0);
@@ -46,15 +59,10 @@ class Stone {
     vecs.add(b);
     vecs.add(c);
     vecs.add(d);
-
-    initialize();
   }
 
-  // fuck processing stupid `this` keyword.
+  // fucking processing stupid `this` keyword.
   void initialize() {
-    size = size + random(-60, 10);
-    origSize = size;
-
     scale(size);
 
     addFaces(vecs);
@@ -167,7 +175,7 @@ class Stone {
 
   void sizeJitter() {
     if (doSizeJitter()) {
-      ccolor = black;
+      ccolor = blood;
       setSize(freqAmp * sizeWeight);
     } else {
       setSize(origSize);
