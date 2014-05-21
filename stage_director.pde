@@ -80,9 +80,13 @@ class StageDirector {
   }
 
   void setFreqInfo() {
-    for(Boid b: flock.boids) {
-      Stone body = b.body;
-      body.freqAmp = songAnalyzer.fft.loudLess;
+    float ilen = flock.boids.size();
+    float bufferSize = songAnalyzer.fft.M.avgSize();
+
+    for(int i = 0; i < ilen; i++) {
+      Stone body = flock.boids.get(i).body;
+      int fftIndex = int(i * bufferSize / ilen);
+      body.freqAmp = songAnalyzer.fft.M.getAvg(fftIndex);
     }
   }
 

@@ -2,7 +2,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 class Flock {
   CopyOnWriteArrayList<Boid> boids; // An ArrayList for all the boids
-  float maxAngVel = radians(0.3);
+  float maxAngVel = radians(0.4);
   Vec3D angVel = Vec3D.randomVector().normalizeTo(maxAngVel);
   Vec3D angAcc = Vec3D.randomVector().normalizeTo(radians(0.01));
   Boolean speedLimit = true;

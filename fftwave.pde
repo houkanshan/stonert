@@ -33,13 +33,6 @@ class FFTWave {
   }
 
   void render() {
-    // first perform a forward fft on one of song's buffers
-    // I'm using the mix buffer
-    //  but you can use any one you like
-    stroke(255, 0, 0, 128);
-    // draw the spectrum as a series of vertical lines
-    // I multiple the value of getBand by 4 
-    // so that we can see the lines better
     int ilen;
 
     ilen = M.avgSize();

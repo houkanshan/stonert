@@ -1,4 +1,4 @@
-float sizeWeight = 0.6;
+float sizeWeight = 50;
 
 class Stone {
   ArrayList<Vec3D> vecs;
@@ -184,8 +184,7 @@ class Stone {
   }
 
   Boolean doSizeJitter() {
-    return origSize > 80
-      && freqAmp * sizeWeight + 10 > origSize
+    return freqAmp * sizeWeight + 10 > origSize
       && freqAmp * sizeWeight < maxSize;
   }
 
