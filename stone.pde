@@ -21,6 +21,8 @@ class Stone {
   float freqAmp = 0;
 
   color ccolor = white;
+  color normalColor = ccolor;
+  color changingColor;
 
   Stone(ArrayList<Vec3D> _vecs) {
     vecs = _vecs;
@@ -65,6 +67,7 @@ class Stone {
   void initialize() {
     scale(size);
 
+    changingColor = getColor();
     addFaces(vecs);
     shapeJitter();
   }
@@ -175,11 +178,23 @@ class Stone {
 
   void sizeJitter() {
     if (doSizeJitter()) {
-      ccolor = blood;
-      setSize(min(freqAmp * sizeWeight, 150));
+      ccolor = changingColor;
+      setSize(map(freqAmp, 0, 5.0, origSize, origSize * 2));
     } else {
       setSize(origSize);
-      ccolor = white;
+      ccolor = normalColor;
+    }
+  }
+
+  color[] colorArray = {ziggurat, neptune, bayoux, oxford, shark};
+
+  color getColor() {
+    if (theme == "black") {
+      return blood;
+    } else {
+      int index = min(int(2 * origSize * colorArray.length / maxSize)
+                      , colorArray.length - 1);
+      return colorArray[index];
     }
   }
 

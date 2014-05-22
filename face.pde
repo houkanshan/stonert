@@ -82,7 +82,7 @@ class Face {
 
   void renderShape() {
     beginShape();
-    stroke(0);
+    stroke(black);
 
     tint(ccolor);
     fill(ccolor);

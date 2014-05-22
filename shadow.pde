@@ -6,6 +6,7 @@ class Shadow {
   Vec2D tb = new Vec2D();
   Vec2D tc = new Vec2D();
   PImage img = loadImage("shadow.png");
+  PImage img_light = loadImage("shadow_light.png");
 
   Shadow() {
     initialize();
@@ -28,7 +29,11 @@ class Shadow {
 
   void render() {
     beginShape();
-    texture(img);
+    if (theme == "black") {
+      texture(img);
+    } else {
+      texture(img_light);
+    }
     //noFill();
     shapeV(a, ta);
     shapeV(b, tb);

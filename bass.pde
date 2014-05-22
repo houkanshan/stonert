@@ -51,7 +51,7 @@ class Bass {
   void render() {
     pushMatrix();
     translate(0, 0, -100);
-    fill(gray, 100);
+    fill(neptune, 100);
     noStroke();
     ellipse(loVec.x, loVec.y, loLoudless, loLoudless);
     ellipse(miVec.x, miVec.y, miLoudless, miLoudless);
