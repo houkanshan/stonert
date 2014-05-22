@@ -176,7 +176,7 @@ class Stone {
   void sizeJitter() {
     if (doSizeJitter()) {
       ccolor = blood;
-      setSize(freqAmp * sizeWeight);
+      setSize(min(freqAmp * sizeWeight, 150));
     } else {
       setSize(origSize);
       ccolor = white;

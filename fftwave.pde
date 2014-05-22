@@ -9,14 +9,18 @@ class FFTWave {
   float amp = width/2;
   float loudLess;
   int averages = 60;
+  ArrayList<Vec3D> vecs;
   
   FFTWave(AudioPlayer _song) {
     song = _song;
     L = new FFT(song.bufferSize(), song.sampleRate());
-    L.linAverages(50);
+    L.linAverages(100);
     R = new FFT(song.bufferSize(), song.sampleRate());
     M = new FFT(song.bufferSize(), song.sampleRate());
     M.linAverages(averages); // maybe should not use.
+
+
+    initVecs();
   }
 
   void run() {
@@ -35,22 +39,22 @@ class FFTWave {
   void render() {
     int ilen;
 
-    ilen = M.avgSize();
-    for(int i = 0; i < ilen; i++) {
-      if (i % 2 != 0) { continue; }
-      float y = height/2 - i * 20;
-      float x = M.getAvg(i) * 5;
-      if (x < 20) { continue; }
-      renderSignal(x, y);
-    }
-
     ilen = L.avgSize();
     for(int i = 0; i < ilen; i++) {
       if (i % 2 != 0) { continue; }
       float y = height/2 + i * 20 + 50;
-      float x = log(L.getAvg(i) + 1) * 50;
+      float x = min(log(L.getAvg(i) + 1) * 300, 500);
       if (x < 20) { continue; }
-      renderSignal(x, y);
+      renderSignal(x, i);
+    }
+  }
+
+  void initVecs() {
+    vecs = new ArrayList<Vec3D>();
+    int ilen = L.avgSize();
+    for(int i = 0; i < ilen; i++) {
+      vecs.add(Vec3D.randomVector());
+      vecs.add(Vec3D.randomVector());
     }
   }
 
@@ -63,14 +67,14 @@ class FFTWave {
     return loudLess;
   }
 
-  void renderSignal(float x, float y) {
+  void renderSignal(float x, int i) {
+    Vec3D v1 = vecs.get(i).normalizeTo(x);
+    Vec3D v2 = vecs.get(i+1).normalizeTo(x);
     beginShape();
 
-    noStroke();
-    fill(disco, 200);
-    vertex(0, y - x/2, 0);
-    vertex(0, y + x/2, 0);
-    vertex(x * sqrt(3) / 2, y, 0);
+    stroke(black);
+    lineV(center, v1.add(center));
+    lineV(center, v2.add(center));
 
     endShape(CLOSE);
   }

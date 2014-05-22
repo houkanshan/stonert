@@ -98,6 +98,10 @@ void lineV(Vec3D v) {
   line(0, 0, 0, v.x, v.y, v.z);
 }
 
+void lineV(Vec3D base, Vec3D v) {
+  line(base.x, base.y, base.z, v.x, v.y, v.z);
+}
+
 
 // The Nature of Code
 // Daniel Shiffman
