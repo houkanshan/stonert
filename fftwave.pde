@@ -72,7 +72,7 @@ class FFTWave {
     Vec3D v2 = vecs.get(i+1).normalizeTo(x);
     beginShape();
 
-    stroke(black);
+    stroke(black, map(x, 0, 500, 100, 255));
     lineV(center, v1.add(center));
     lineV(center, v2.add(center));
 
