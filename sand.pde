@@ -12,7 +12,7 @@ class Sand {
 
   SandBody body;
 
-  float r = 10;
+  float r = 500;
 
   Vec3D loc = new Vec3D(0, 0, 0);
   Vec3D vel = new Vec3D(0, 0, 0);
@@ -23,7 +23,7 @@ class Sand {
   Sand(float x, float y, float z) {
     body = new SandBody();
     acc = new Vec3D(0, 0, 0);
-    vel = new Vec3D(random(0.5,1), random(-1,1), random(-2,2));
+    vel = new Vec3D(random(0.5,1), random(-1,1), random(-30,30));
     loc = new Vec3D(x, y, z);
   }
 

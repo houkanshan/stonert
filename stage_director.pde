@@ -74,7 +74,7 @@ class StageDirector {
 
     if (count < 1) { return; }
 
-    Sand sand = new Sand(0, y, 0);
+    Sand sand = new Sand(0, y, random(0, 400));
     sand.vel.x = xVel;
     sandstorm.addSand(sand);
   }
@@ -84,9 +84,11 @@ class StageDirector {
     float bufferSize = songAnalyzer.fft.M.avgSize();
 
     for(int i = 0; i < ilen; i++) {
-      Stone body = flock.boids.get(i).body;
+      Boid boid = flock.boids.get(i);
+      Stone body = boid.body;
       int fftIndex = int(i * bufferSize / ilen);
-      body.freqAmp = songAnalyzer.fft.M.getAvg(fftIndex);
+      boid.freqAmp = songAnalyzer.fft.M.getAvg(fftIndex);
+      body.freqAmp = boid.freqAmp;
     }
   }
 

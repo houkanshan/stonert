@@ -7,9 +7,9 @@ Flock flock;
 SongAnalyzer songAnalyzer;
 StageDirector stageDirector;
 Sandstorm sandstorm;
-String theme = "black";
+String theme = "white";
 color backgroundColor;
-Boolean fullscreen = true;
+Boolean fullscreen = false;
 Vec3D center;
 
 Boolean recordMovie = false;

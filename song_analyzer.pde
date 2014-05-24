@@ -44,6 +44,7 @@ class SongAnalyzer {
 
   void initPlayer(AudioPlayer song) {
     song.loop();
+    pause();
   }
 
   // Player Control

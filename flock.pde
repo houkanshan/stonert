@@ -47,7 +47,7 @@ class Flock {
   void rotate3D() {
     for(Boid b: boids) {
       Vec3DHelper.rotate3D(angVel, angAcc).normalizeTo(maxAngVel);
-      Vec3DHelper.rotate3D(b.loc, angVel, center);
+      Vec3DHelper.rotate3D(b.loc, angVel);
     }
   }
 
@@ -55,7 +55,7 @@ class Flock {
     Stone body = new Stone(random(start, end));
 
     Vec3D v = Vec3D.randomVector().normalizeTo(r);
-    Vec3D loc = v.add(center).jitter(locJitter);
+    Vec3D loc = v.jitter(locJitter);
     Boid b = new Boid(loc.x, loc.y, loc.z, body);
 
     body.rotateTo(v);

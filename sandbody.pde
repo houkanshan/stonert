@@ -12,7 +12,12 @@ class SandBody {
 
   void render() {
     noStroke();
-    fill(black, 255);
-    ellipse(0, 0, 3, 3);
+    if (theme == "black") {
+      fill(black, 255);
+      ellipse(0, 0, 2, 2);
+    } else {
+      fill(oxford, 200);
+      ellipse(0, 0, 3, 3);
+    }
   }
 }
